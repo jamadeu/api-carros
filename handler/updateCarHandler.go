@@ -8,6 +8,19 @@ import (
 	"github.com/jamadeu/api-cars/schemas"
 )
 
+// @BasePath /api/v1
+
+// @Summary Update car
+// @Descriptaion Update a car
+// @Tags Cars
+// @Accept json
+// @Produce json
+// @Param id query string true "Car identification"
+// @Param request body UpdateCarRequest true "Car data to Update"
+// @Success 200 {object} UpdateCarResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /car [put]
 func UpdateCarHandler(ctx *gin.Context) {
 	request := UpdateCarRequest{}
 	ctx.BindJSON(&request)

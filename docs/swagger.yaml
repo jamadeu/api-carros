@@ -1,0 +1,228 @@
+definitions:
+  handler.CreateCarRequest:
+    properties:
+      carModel:
+        type: string
+      color:
+        type: string
+      manufacturer:
+        type: string
+      value:
+        type: number
+    type: object
+  handler.CreateCarResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.CarResponse'
+      message:
+        type: string
+    type: object
+  handler.DeleteCarResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.CarResponse'
+      message:
+        type: string
+    type: object
+  handler.ErrorResponse:
+    properties:
+      errorCode:
+        type: string
+      message:
+        type: string
+    type: object
+  handler.ListCarsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/schemas.CarResponse'
+        type: array
+      message:
+        type: string
+    type: object
+  handler.ShowCarResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.CarResponse'
+      message:
+        type: string
+    type: object
+  handler.UpdateCarRequest:
+    properties:
+      carModel:
+        type: string
+      color:
+        type: string
+      manufacturer:
+        type: string
+      value:
+        type: number
+    type: object
+  handler.UpdateCarResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.CarResponse'
+      message:
+        type: string
+    type: object
+  schemas.CarResponse:
+    properties:
+      carModel:
+        type: string
+      color:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        type: string
+      id:
+        type: integer
+      manufacturer:
+        type: string
+      updatedAt:
+        type: string
+      value:
+        type: number
+    type: object
+info:
+  contact: {}
+paths:
+  /car:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: Car identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.DeleteCarResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Delete car
+      tags:
+      - Cars
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Car identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ShowCarResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Show car
+      tags:
+      - Cars
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateCarRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CreateCarResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Create car
+      tags:
+      - Cars
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Car identification
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Car data to Update
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateCarRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.UpdateCarResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Update car
+      tags:
+      - Cars
+  /cars:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ListCarsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: List cars
+      tags:
+      - Cars
+swagger: "2.0"

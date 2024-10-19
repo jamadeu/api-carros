@@ -8,6 +8,18 @@ import (
 	"github.com/jamadeu/api-cars/schemas"
 )
 
+// @BasePath /api/v1
+
+// @Summary Show car
+// @Descriptaion Show a car
+// @Tags Cars
+// @Accept json
+// @Produce json
+// @Param id query string true "Car identification"
+// @Success 200 {object} ShowCarResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /car [get]
 func ShowCarHandler(ctx *gin.Context) {
 	id := ctx.Query("id")
 	if id == "" {

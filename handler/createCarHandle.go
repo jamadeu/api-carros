@@ -7,6 +7,18 @@ import (
 	"github.com/jamadeu/api-cars/schemas"
 )
 
+// @BasePath /api/v1
+
+// @Summary Create car
+// @Descriptaion Create a new car
+// @Tags Cars
+// @Accept json
+// @Produce json
+// @Param request body CreateCarRequest true "Request body"
+// @Success 200 {object} CreateCarResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /car [post]
 func CreateCarHandler(ctx *gin.Context) {
 	request := CreateCarRequest{}
 	ctx.BindJSON(&request)

@@ -8,6 +8,18 @@ import (
 	"github.com/jamadeu/api-cars/schemas"
 )
 
+// @BasePath /api/v1
+
+// @Summary Delete car
+// @Descriptaion Delete a car
+// @Tags Cars
+// @Accept json
+// @Produce json
+// @Param id query string true "Car identification"
+// @Success 200 {object} DeleteCarResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /car [delete]
 func DeleteCarHandler(ctx *gin.Context) {
 	id := ctx.Query("id")
 	if id == "" {

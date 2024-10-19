@@ -7,6 +7,17 @@ import (
 	"github.com/jamadeu/api-cars/schemas"
 )
 
+// @BasePath /api/v1
+
+// @Summary List cars
+// @Descriptaion List cars
+// @Tags Cars
+// @Accept json
+// @Produce json
+// @Success 200 {object} ListCarsResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /cars [get]
 func ListCarsHandler(ctx *gin.Context) {
 	cars := []schemas.Car{}
 
