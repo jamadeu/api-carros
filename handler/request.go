@@ -32,3 +32,17 @@ func (r *CreateCarRequest) Validate() error {
 	}
 	return nil
 }
+
+type UpdateCarRequest struct {
+	CarModel     string  `json:"carModel"`
+	Manufacturer string  `json:"manufacturer"`
+	Color        string  `json:"color"`
+	Value        float64 `json:"value"`
+}
+
+func (r *UpdateCarRequest) Validate() error {
+	if r.CarModel != "" || r.Manufacturer != "" || r.Color != "" || r.Value > 0 {
+		return nil
+	}
+	return fmt.Errorf("at least one valid field must be provided")
+}
